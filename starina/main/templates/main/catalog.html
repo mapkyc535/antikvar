@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Каталог</h1>
+
+<div class="row row-cols-1 row-cols-md-4">
+    {% for item in category %}
+    <div class="col mb-5">
+        <div class="card h-100">
+            <a href="{% url 'category' item.pk %}"><img src="{{ item.photo.url }}" class="card-img-top" alt="{{ item.title }}"></a>
+            <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'category' item.pk %}">{{ item.title }}</a></h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

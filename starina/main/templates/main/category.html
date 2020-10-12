@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ category.title }} :: {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-4">
+    {% for item in product %}
+    <div class="col mb-5">
+        <div class="card h-100">
+            <img src="{{ item.photo.url }}" class="card-img-top" alt="{{ item.title }}">
+            <div class="card-body">
+                <a href="{% url 'product' item.pk %}"><p class="card-text">{{ item.title }}</p></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

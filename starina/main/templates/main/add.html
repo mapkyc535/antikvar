@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<h1>Оценка и покупка</h1>
+
+<p>Заполните форму и загрузите фото или напишите нам на номер +7-921-940-74-20 Viber/WhatsApp. Наш эксперт оценит
+    предмет</p>
+<form action="{% url 'add' %}" method="post" class="was-validated" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {% comment %}
+    {{ form.as_p }}
+    {% endcomment %}
+
+    {{ form.nom_field.errors }}
+
+    <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Представтесь:</label>
+        {{ form.name }}
+        <div class="invalid-feedback">
+            {{ form.name.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.contact.id_for_label }}">Ваши контакты:</label>
+        {{ form.contact }}
+        <div class="invalid-feedback">
+            {{ form.contact.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.description.id_for_label }}">Описание:</label>
+        {{ form.description }}
+        <div class="invalid-feedback">
+            {{ form.description.errors }}
+        </div>
+    </div>
+
+    <p>Фотографии:</p>
+
+    <div class="form-group">
+        {{ form.photos }}
+        <div class="invalid-feedback">
+            {{ form.photos.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.captcha }}
+        <div class="invalid-feedback">
+            {{ form.captcha.errors }}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-secondary btn-lg">Отправить</button>
+
+</form>
+
+{% endblock %}

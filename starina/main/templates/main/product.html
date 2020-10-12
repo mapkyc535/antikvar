@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ product.title }} :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+{% if product.is_published %}
+
+
+<h4>{{ product.title }}</h4>
+<div class="card">
+    <div class="card-header">
+        <div class="text-center">
+            {% for item in images %}
+            <a data-fancybox="gallery" href="{{ item.photos.url }}">
+                <img src="{{ item.photosmin.url }}" class="img-thumbnail">
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="card-body">
+        <p class="card-text">Категория: <a href="{% url 'category' product.category.pk %}">{{ product.category }}</a></p>
+        <p class="card-text">Матерьял: {{ product.material }}</p>
+        <p class="card-text">Техника исполнения: {{ product.execution_technique }}</p>
+        {% autoescape off %}
+        <p class="card-text">Описание: {{ product.description }}</p>
+        {% endautoescape %}
+    </div>
+</div>
+
+
+{% endif %}
+{% endblock %}
+<style>
+    .gallery{
+    display: flex;
+    flex-warp: warp;
+}
+
+.gallery a{
+    margin: 0 15px 15px 0;
+}
+
+.gallery img{
+    display: block;
+}
+
+
+</style>
